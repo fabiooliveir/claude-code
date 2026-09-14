@@ -7,6 +7,7 @@ import Sections from '../sections'
 import { codeBlocksOf } from './code-blocks-of'
 import type { DetailModel } from './detail-model'
 import { FILE_FRAME_NODES } from './file-frame-nodes'
+import { languageOf } from './language-of'
 import { MAX_CODE_CHARS } from './max-code-chars'
 import { placeholderOf } from './placeholder-of'
 import type Types from './types'
@@ -38,7 +39,8 @@ export function detailView(
   })
 
   const isTruncated = detail.body?.isTruncated === true || code.isTruncated
-  const path = Layout.sanitizeName(detail.path).slice(-MAX_CODE_CHARS)
+  const path = Layout.sanitizePath(detail.path).slice(-MAX_CODE_CHARS)
+  const language = languageOf(path, code.sources[0])
 
   const footer = isTruncated
     ? [
@@ -55,7 +57,7 @@ export function detailView(
   ))
 
   const hunks = code.sources.map(source => (
-    <Code source={source} format="diff" path={path} />
+    <Code source={source} format="diff" path={path} language={language} />
   ))
 
   const element = (

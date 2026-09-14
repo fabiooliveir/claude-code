@@ -41,7 +41,8 @@ export function drawWindow(
 
   function codeOf(segment: HunkSegment, cut: WindowCut): RenderElement {
     const source = Detail.hunkSourceOf(Plan.hunkWindowOf(segment, cut))
-    const path = Layout.sanitizeName(segment.path)
+    const path = Layout.sanitizePath(segment.path)
+    const language = Detail.languageOf(path, source)
     chars += source.length
 
     const isOver = chars > Detail.MAX_BODY_CHARS
@@ -51,7 +52,7 @@ export function drawWindow(
         …
       </Text>
     ) : (
-      <Code source={source} format="diff" path={path} />
+      <Code source={source} format="diff" path={path} language={language} />
     )
   }
 

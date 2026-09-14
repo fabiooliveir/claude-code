@@ -53,11 +53,13 @@ describe('detail-view', () => {
         ].join('\n'),
         format: 'diff',
         path: 'src/app/config.ts',
+        language: 'typescript',
       },
       {
         source: ['@@ -1000,1 +1000,2 @@', ' x = 1', '+y = 2'].join('\n'),
         format: 'diff',
         path: 'src/app/config.ts',
+        language: 'typescript',
       },
     ])
 
